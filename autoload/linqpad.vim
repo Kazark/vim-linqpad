@@ -7,15 +7,23 @@ let g:linqpad_loaded = 1
 
 let g:linqpad_runner_cmd = "LPRun"
 
-function linqpad#EvalExpressionScript(filepath)
-    return system(g:linqpad_runner_cmd . ' -lang=E ' . a:filepath)
+function linqpad#RunLinqPad(filepath, lang)
+    return system(g:linqpad_runner_cmd . ' -lang=' . a:lang . ' ' . a:filepath)
+endfunction
+
+function linqpad#PassCodeSnippetToLinqPad(snippet, lang)
+    let l:tempfile = tempname()
+    call writefile([a:snippet], l:tempfile)
+    echo linqpad#RunLinqPad(l:tempfile, a:lang)
+    call delete(l:tempfile)
 endfunction
 
 function linqpad#EvalExpression(expr)
-    let l:tempfile = tempname()
-    call writefile([a:expr], l:tempfile)
-    echo linqpad#EvalExpressionScript(l:tempfile)
-    call delete(l:tempfile)
+    call linqpad#PassCodeSnippetToLinqPad(a:expr, 'E')
+endfunction
+
+function linqpad#ExecStatement(statement)
+    call linqpad#PassCodeSnippetToLinqPad(a:statement, 'S')
 endfunction
 
 "function linqpad#EvalSelectionAsExpression()
