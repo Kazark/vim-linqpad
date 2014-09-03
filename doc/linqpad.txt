@@ -1,0 +1,23 @@
+*linqpad.txt* Execute C# expressions or evaluation C# statements
+
+Author: Kazark (@Kazark on Github, StackExchange)
+License: Public Domain
+
+INTRODUCTION                                    *linqpad*
+
+This plugin for Vim uses LinqPad's console runner to evaluate C# expressions, so
+you will need that program installed.
+
+COMMANDS                                        *linqpad-commands*
+
+                                                *linqpad-:Linqeval*
+:Linqeval [expression]      Evaluate a C# expression
+
+                                                *linqpad-:Linqexec*
+:Linqexec [statement]       Execute a C# statement
+
+CONFIGURATION                                   *linqpad-config*
+
+You can configure the LinqPad runner command. The default is:
+>
+	let g:linqpad_runner_cmd = "LPRun"
